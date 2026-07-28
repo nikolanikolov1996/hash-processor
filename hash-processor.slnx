@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="HashProcessor.Api/HashProcessor.Api.csproj" />
+  <Project Path="HashProcessor.Contracts/HashProcessor.Contracts.csproj" />
+  <Project Path="HashProcessor.Worker/HashProcessor.Worker.csproj" />
+</Solution>
