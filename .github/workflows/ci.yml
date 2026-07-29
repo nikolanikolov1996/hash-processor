@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore hash-processor.slnx
+
+      - name: Build
+        run: dotnet build hash-processor.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test HashProcessor.Tests/HashProcessor.Tests.csproj --configuration Release --no-build
+
+      - name: Audit NuGet packages
+        run: dotnet package list --project hash-processor.slnx --vulnerable --include-transitive --no-restore

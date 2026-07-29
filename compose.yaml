@@ -1,0 +1,43 @@
+name: hash-processor
+
+services:
+  mariadb:
+    image: mariadb:11.8.8
+    environment:
+      MARIADB_DATABASE: hash_processor
+      MARIADB_USER: hash_processor
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-hash_processor_db_dev}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-hash_processor_root_dev}
+      TZ: UTC
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - ./HashProcessor.Database/Scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  rabbitmq:
+    image: rabbitmq:4.3.4-management
+    environment:
+      RABBITMQ_DEFAULT_USER: hash_processor
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-hash_processor_mq_dev}
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  mariadb-data:
+  rabbitmq-data:

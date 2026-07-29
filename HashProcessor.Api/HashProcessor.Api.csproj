@@ -4,15 +4,19 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>274862fd-cbcf-4cc5-9b1f-1caf78ee6952</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.10" />
     <PackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
+    <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HashProcessor.Contracts\HashProcessor.Contracts.csproj" />
+    <ProjectReference Include="..\HashProcessor.Database\HashProcessor.Database.csproj" />
+    <ProjectReference Include="..\HashProcessor.Messaging\HashProcessor.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

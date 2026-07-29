@@ -1,5 +1,14 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+    <File Path="Directory.Build.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
   <Project Path="HashProcessor.Api/HashProcessor.Api.csproj" />
   <Project Path="HashProcessor.Contracts/HashProcessor.Contracts.csproj" />
+  <Project Path="HashProcessor.Database/HashProcessor.Database.csproj" />
+  <Project Path="HashProcessor.Messaging/HashProcessor.Messaging.csproj" />
+  <Project Path="HashProcessor.Tests/HashProcessor.Tests.csproj" />
   <Project Path="HashProcessor.Worker/HashProcessor.Worker.csproj" />
 </Solution>
